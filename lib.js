@@ -21,7 +21,16 @@ function createGrowthModel (lengthToWingspan, leavesEatenToWeight) {
  *
  * @return a GrowthModel object
  */
+
 function averageGrowthModel (growthModels) {
+if (growthModels.length > 0){
+  const sum = growthModels.reduce((acc, next) =>
+    createGrowthModel(acc.lengthToWingspan + next.lengthToWingspan,
+        acc.leavesEatenToWeight + next.leavesEatenToWeight), createGrowthModel(0, 0))
+
+  return createGrowthModel(sum.lengthToWingspan / growthModels.length,
+    sum.leavesEatenToWeight / growthModels.length)
+  }
   // TODO: implement using Array.prototype.reduce()
 }
 
